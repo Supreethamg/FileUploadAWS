@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+<title th:text="${name}">Welcome</title>
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+<link rel="stylesheet" th:href="@{/css/main.css}"
+	href="../../css/main.css" />
+
+</head>
+
+<body class="container">
+	<div class="row">
+	<div class="text-center">
+	<h2>File Upload</h2>
+	</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<form id="uploadForm">
+				<div class="row">
+					<div class="col-sm-8">
+						<label>File description</label> <input
+							class="form-control input-sm" type="text" name="desc" />
+
+					</div>
+					<div class="col-sm-4">
+						<label>Upload</label> <input class="form-control input-sm"
+							type="file" name="files" />
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-sm-2">
+						<input class="hidden form-control input-sm username" type="text"
+							name="username" id="username" /> <input type="submit"
+							class="form-control btn btn-primary" value="Upload"
+							id="btnUpload" />
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<br/>
+	<div class="row">
+		<div class="col-sm-2">
+			<form th:action="@{/list}" method="get" id="refreshList">
+				<input class="hidden form-control input-sm username" type="text"
+					name="username" id="username" /> <input type="submit"
+					class="form-control btn btn-primary" value="Refresh List"
+					id="btnList" />
+			</form>
+		</div>
+	</div>
+
+	<div th:if="${not #lists.isEmpty(files)}">
+		<h2>File List</h2>
+		<table class="table table-striped">
+			<tr>
+				<th>Id</th>
+				<th>Filename</th>
+				<th>Description</th>
+				<th>Username</th>
+				<th>Upload Time</th>
+				<th>View</th>
+				<!-- <th>Edit</th> -->
+				<th>Delete</th>
+			</tr>
+			<tr th:each="file : ${files}">
+				<td th:text="${file.id}">Id</td>
+				<td th:text="${file.filename}">filename</td>
+				<td th:text="${file.description}">descirption</td>
+				<td th:text="${file.username}">username</td>
+				<td th:text="${file.uploadtime}">uploadtime</td>
+				<td><a
+					th:href="@{'http://dwvep4yiyt8b1.cloudfront.net/' + ${file.filename}}"
+					target="_blank">View</a></td>
+				<!--  <td><a th:href="${'/file/edit/' + file.id}">Edit</a></td> -->
+				<td><button type="button" class="btn btn-link" th:onclick="'javascript:deleteFile(\''+ ${file.filename} +'\');'"
+				style="padding:0px" 
+				id="btnDelete">Delete</button></td>
+			</tr>
+		</table>
+
+	</div>
+
+	<script type="text/javascript" src="webjars/jquery/2.2.4/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/home.js"></script>
+</body>
+</html>

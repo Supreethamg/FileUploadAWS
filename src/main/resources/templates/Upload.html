@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<form method="POST" enctype="multipart/form-data" id="uploadForm">
+    <label>File description</label>
+    <input type="text" name="desc"/><br/><br/>
+    <label> Upload</label>
+    <input type="file" name="files"/><br/><br/>
+    
+    <input type="submit" value="Submit" id="btnSubmit"/>
+</form>
+
+<pre>
+    <span id="resultset"></span>
+</pre>
+
+
+
+<script type="text/javascript"
+        src="webjars/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript" src="js/main.js"></script>
+
+</body>
+</html>
